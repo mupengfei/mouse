@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>this is Main page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+<script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.1/jquery.min.js"
+	th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
+		<br /> <br /> <br /> <br />
+
+		<div class="row">
+			<div class="col-xs-2"></div>
+			<div class="col-xs-8">
+				<form role="form" th:action="@{/subscribe}">
+					<input type="text" class="form-control" id="mouseGroupId"
+						placeholder="Enter group id"> <br /> <br /> <br /> <br />
+					<br /> <br /> <br /> <br /> <br /> <br />
+					<button type="submit" class="btn btn-danger btn-block">Go</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+</html>
