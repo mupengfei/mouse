@@ -17,19 +17,25 @@
 <body>
 	<div class="container">
 		<br /> <br /> <br /> <br /> <br /> <br /> <br />
+
+
 		<div class="row">
-			<div class="col-xs-2"></div>
-			<div class="col-xs-8">
-				<form role="form" th:action="@{/enterGroupId}" method="post">
-					<input type="text" class="form-control" id="mouseGroupId"
-						name="mouseGroupId" maxlength="20" placeholder="Enter group id"></input>
+			<div class="col-xs-1"></div>
+			<div class="col-xs-10 text-center">
+				<form action="">
+					<h1>mouse nums</h1>
 					<br />
-					<div th:if="${mouseGroupIdError}">
-						<div class="alert alert-danger" th:text="${mouseGroupIdError}"
-							role="alert"></div>
-					</div>
-					<br /> <br /> <br /> <br /> <br /> <br /> <br /> <br />
-					<button type="submit" class="btn btn-danger btn-block">Go</button>
+					<p style="font-size: 80px" th:text="${mouseGroupNum}">0</p>
+					<br /> <br /> <br /> <br /> <input type="text"
+						class="hidden" name="mouseGroupId" th:value="${mouseGroupId}"></input>
+
+
+					<button type="submit" formmethod="get" th:formaction="@{/addMouse}"
+						formaction="/addMouse" class="btn btn-primary btn-block">Add</button>
+					<br /> <br />
+					<button type="submit"
+						th:formaction="@{/groupMouse?mouseGroupId=${mouseGroupId}}"
+						class="btn btn-success btn-block">Group</button>
 				</form>
 			</div>
 		</div>

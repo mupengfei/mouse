@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>this is Main page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+<script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.1/jquery.min.js"
+	th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+</head>
+<body>
+	<div class="container">
+		<br /> <br /> <br />
+		<div class="row">
+			<div class="col-xs-2"></div>
+			<div class="col-xs-8">
+
+				<label class="control-label" for="input01">No.</label>
+				<div class="controls">
+					<input type="text" placeholder="mouse No." name="mouseNo"
+						class="form-control"></input> <br />
+					<div id="mouseNoError"></div>
+				</div>
+
+				<label class="control-label" for="input01">tumor length</label>
+				<div class="controls">
+					<input id="tumorLengthInput" type="number"
+						placeholder="tumor length" name="tumorLength" class="form-control"></input>
+					<br />
+					<div id="tumorLengthError"></div>
+				</div>
+
+
+				<label class="control-label" for="input01">tumor width</label>
+				<div class="controls">
+					<input id="tumorWidthInput" type="number" placeholder="tumor width"
+						name="tumorWidth" class="form-control"></input> <br />
+					<div id="${tumorWidthError}"></div>
+				</div>
+				<label class="control-label" for="input01">tumor volume</label>
+				<div class="controls">
+					<input id="tumorVolumeInput" type="text" placeholder="tumor volume"
+						name="tumorVolume" class="form-control"></input>
+				</div>
+			</div>
+		</div>
+	</div>
+	<script th:inline="JavaScript">
+		/*<![CDATA[*/
+		//$(function() {
+		//$('#tumorLengthInput').on('valuechange', function(e, previous) {
+		//alert('111');
+		//})
+		//})
+		$(function() {
+			$('#tumorLengthInput')
+					.bind(
+							'input propertychange',
+							function() {
+								var length = $('#tumorLengthInput').val();
+								if (!isNaN(length) && length != undefined
+										&& length != "") {
+									culTumorVolume();
+									$('#tumorLengthError').hide();
+								} else {
+									$('#tumorVolumeInput').val(0)
+									$('#tumorLengthError').show();
+									$('#tumorLengthError')
+											.html(
+													'<div class="alert alert-danger" role="alert">tumor length must be number</div>')
+								}
+							});
+		})
+		$(function() {
+			$('#tumorWidthInput')
+					.bind(
+							'input propertychange',
+							function() {
+								var length = $('#tumorWidthInput').val();
+								if (!isNaN(length) && length != undefined
+										&& length != "") {
+									culTumorVolume();
+									$('#tumorWidthError').hide();
+								} else {
+									$('#tumorVolumeInput').val(0)
+									$('#tumorWidthError').show();
+									$('#tumorWidthError')
+											.html(
+													'<div class="alert alert-danger" role="alert">tumor length must be number</div>')
+								}
+							});
+		})
+		function culTumorVolume() {
+			var length = $('#tumorLengthInput').val();
+			var width = $('#tumorWidthInput').val();
+			if (length != undefined && width != undefined && length != ""
+					&& width != "") {
+				var volume = length * width * width / 2;
+				$('#tumorVolumeInput').val(volume + "")
+			}
+		}
+		/*]]>*/
+	</script>
+</body>
+</html>
