@@ -26,12 +26,12 @@
 					<h1>mouse nums</h1>
 					<br />
 					<p style="font-size: 80px" th:text="${mouseGroupNum}">0</p>
-					<br /> <br /> <br /> <br /> <input type="text"
-						class="hidden" name="mouseGroupId" th:value="${mouseGroupId}"></input>
+					<br /> <br /> <br /> <br /> <input type="text" class="hidden"
+						name="mouseGroupId" th:value="${mouseGroupId}"></input>
 
 
-					<button type="submit" formmethod="get" th:formaction="@{/addMouse}"
-						formaction="/addMouse" class="btn btn-primary btn-block">Add</button>
+					<button type="submit" formmethod="get" th:formaction="@{/goAddMouse}"
+						formaction="/goAddMouse" class="btn btn-primary btn-block">Add</button>
 					<br /> <br />
 					<button type="submit"
 						th:formaction="@{/groupMouse?mouseGroupId=${mouseGroupId}}"

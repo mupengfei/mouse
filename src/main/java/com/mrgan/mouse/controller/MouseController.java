@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 @Controller
@@ -30,9 +31,17 @@ public class MouseController {
 		return model;
 	}
 
-	@RequestMapping("/addMouse")
-	public ModelAndView addMouse(String mouseGroupId, ModelAndView model) {
+	@RequestMapping("/goAddMouse")
+	public ModelAndView goAddMouse(String mouseGroupId, ModelAndView model) {
 		model.setViewName("addMouse");
 		return model;
+	}
+
+	@RequestMapping("/addMouse")
+	@ResponseBody
+	public String addMouse(String mouseGroupId, String tumorVolume,
+			String mouseNo, ModelAndView model) {
+		System.out.println(mouseNo + " " + tumorVolume);
+		return "{\"su\":\"sdsd\"}";
 	}
 }

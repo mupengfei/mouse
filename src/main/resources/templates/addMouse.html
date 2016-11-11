@@ -13,6 +13,10 @@
 	rel="stylesheet" media="screen" />
 <script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.1/jquery.min.js"
 	th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+<script
+	src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
+
 </head>
 <body>
 	<div class="container">
@@ -23,8 +27,8 @@
 
 				<label class="control-label" for="input01">No.</label>
 				<div class="controls">
-					<input type="text" placeholder="mouse No." name="mouseNo"
-						class="form-control"></input> <br />
+					<input id="mouseNoInput" type="text" placeholder="mouse No."
+						name="mouseNo" class="form-control"></input> <br />
 					<div id="mouseNoError"></div>
 				</div>
 
@@ -35,7 +39,6 @@
 					<br />
 					<div id="tumorLengthError"></div>
 				</div>
-
 
 				<label class="control-label" for="input01">tumor width</label>
 				<div class="controls">
@@ -48,16 +51,58 @@
 					<input id="tumorVolumeInput" type="text" placeholder="tumor volume"
 						name="tumorVolume" class="form-control"></input>
 				</div>
+
+				<br /> <br /> <br /> <br />
+				<button type="button" id="addBut" class="btn btn-primary btn-block">Add</button>
+				<br /> <br />
+				<button type="button" id="returnBut"
+					class="btn btn-warning btn-block">Return</button>
 			</div>
 		</div>
 	</div>
+
+	<div id="loading" class="modal fade bs-example-modal-sm" tabindex="-1"
+		role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+
+			<div class="progress"
+				style="width: 200px; margin: 0 auto; margin-top: 300px;">
+				<div
+					class="progress-bar progress-bar-info progress-bar-striped active"
+					role="progressbar" aria-valuenow="20" aria-valuemin="0"
+					aria-valuemax="100" style="width: 100%">
+					<span class="sr-only">20% Complete</span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+
 	<script th:inline="JavaScript">
 		/*<![CDATA[*/
-		//$(function() {
-		//$('#tumorLengthInput').on('valuechange', function(e, previous) {
-		//alert('111');
-		//})
-		//})
+		$('#addBut').click(function() {
+			$('#loading').modal({
+				show : true,
+				backdrop : 'static'
+			});
+			$.ajax({
+				async : true,
+				type : "POST",
+				url : [[@{/addMouse}]],
+				data : {
+					tumorVolume : $("#tumorVolumeInput").val(),
+					mouseNo : $("#mouseNoInput").val()
+				},
+				dataType : "json",
+				success : function(data) {
+					$('#loading').modal('hide');
+				},
+				error : function() {
+					alert(arguments[1]);
+				}
+			});
+		});
+		
 		$(function() {
 			$('#tumorLengthInput')
 					.bind(
