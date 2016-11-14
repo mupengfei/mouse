@@ -34,7 +34,7 @@
 						formaction="/goAddMouse" class="btn btn-primary btn-block">Add</button>
 					<br /> <br />
 					<button type="submit"
-						th:formaction="@{/groupMouse?mouseGroupId=${mouseGroupId}}"
+						th:formaction="@{/groupMouse(mouseGroupId=${mouseGroupId})}"
 						class="btn btn-success btn-block">Group</button>
 				</form>
 			</div>

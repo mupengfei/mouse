@@ -54,9 +54,9 @@
 
 				<br /> <br /> <br /> <br />
 				<button type="button" id="addBut" class="btn btn-primary btn-block">Add</button>
-				<br /> <br />
-				<button type="button" id="returnBut"
-					class="btn btn-warning btn-block">Return</button>
+				<br /> <br /> <a href="/groupMouse?mouseGroupId=1"
+					th:href="@{/enterGroupId(mouseGroupId=${mouseGroupId})}"><button
+						type="button" id="returnBut" class="btn btn-warning btn-block">Return</button></a>
 			</div>
 		</div>
 	</div>
@@ -90,8 +90,11 @@
 				type : "POST",
 				url : [[@{/addMouse}]],
 				data : {
+					tumorLength : $("#tumorLengthInput").val(),
+					tumorWidth : $("#tumorWidthInput").val(),
 					tumorVolume : $("#tumorVolumeInput").val(),
-					mouseNo : $("#mouseNoInput").val()
+					no : $("#mouseNoInput").val(),
+					groupId : [[${mouseGroupId}]]
 				},
 				dataType : "json",
 				success : function(data) {
