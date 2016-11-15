@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+<title>this is Main page</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<meta name="viewport"
+	content="width=device-width,target-densitydpi=high-dpi,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+<script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.1/jquery.min.js"
+	th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+<script th:src="@{/js/jquery.page.js}"></script>
+<style>
+.tcdPageCode {
+	padding: 15px 20px;
+	text-align: left;
+	color: #ccc;
+	text-align: center;
+}
+
+.tcdPageCode a {
+	display: inline-block;
+	color: #428bca;
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 10px;
+	border: 1px solid #ddd;
+	margin: 0 2px;
+	border-radius: 4px;
+	vertical-align: middle;
+}
+
+.tcdPageCode a:hover {
+	text-decoration: none;
+	border: 1px solid #428bca;
+}
+
+.tcdPageCode span.current {
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 10px;
+	margin: 0 2px;
+	color: #fff;
+	background-color: #428bca;
+	border: 1px solid #428bca;
+	border-radius: 4px;
+	vertical-align: middle;
+}
+
+.tcdPageCode span.disabled {
+	display: inline-block;
+	height: 25px;
+	line-height: 25px;
+	padding: 0 10px;
+	margin: 0 2px;
+	color: #bfbfbf;
+	background: #f2f2f2;
+	border: 1px solid #bfbfbf;
+	border-radius: 4px;
+	vertical-align: middle;
+}
+</style>
+</head>
+<body>
+	<div class="container">
+		<br /> <br /> <br /> 
+		<div class="row">
+			<div class="col-xs-2"></div>
+			<div class="col-xs-8">
+				<a href="/groupMouse?mouseGroupId=1"
+					th:href="@{/enterGroupId(mouseGroupId=${mouseGroupId})}"><button
+						type="button" id="returnBut" class="btn btn-warning btn-block">Return</button></a>
+				<br /> <br />
+				<ul class="list-group" th:each="mouse : ${mouses}">
+					<li
+						th:text="'No:' + ${mouse.no} + ' - tumor volume:' + ${mouse.tumorVolume}"
+						class="list-group-item"></li>
+					<!-- 	<li class="list-group-item">Dapibus ac facilisis in</li>
+					<li class="list-group-item">Morbi leo risus</li>
+					<li class="list-group-item">Porta ac consectetur ac</li>
+					<li class="list-group-item">Vestibulum at eros</li> -->
+				</ul>
+				<div class="tcdPageCode"></div>
+			</div>
+		</div>
+	</div>
+	<script th:inline="JavaScript">
+	/*<![CDATA[*/
+		$(".tcdPageCode").createPage({
+			pageCount : [[${sumPages}]],
+			current : [[${page}]],
+			backFn : function(p) {
+				window.location.href = [[@{/groupPages(mouseGroupId=${mouseGroupId})}]] + "&page=" + p;
+			}
+		});
+		/*]]>*/
+	</script>
+</body>
+</html>

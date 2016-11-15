@@ -12,9 +12,11 @@ public interface MouseDAO extends CrudRepository<Mouse, Long> {
 	long countByGroupIdAndGroupNum(String groupId, int groupNum);
 	
 	@Query("select MAX(mo.groupNum) from Mouse mo where mo.groupId = ?")
-	int findByGroupIdAndGroupNumMax(String groupId);
+	int findGroupNumMaxByGroupId(String groupId);
 	
 	List<Mouse> findByGroupId(String groupId, Sort sort);
+	
+	List<Mouse> findByGroupIdAndGroupNum(String groupId, int groupNum, Sort sort);
 
 	List<Mouse> findByNoAndGroupId(String no, String groupId);
 

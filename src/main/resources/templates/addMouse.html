@@ -98,7 +98,44 @@
 				},
 				dataType : "json",
 				success : function(data) {
-					$('#loading').modal('hide');
+					if(data['save'] == 1){
+						$('#loading').modal('hide');
+						$("#tumorLengthInput").val("");
+						$("#tumorWidthInput").val("");
+						$("#tumorVolumeInput").val("");
+						$("#mouseNoInput").val("");
+					}else{
+						var r=confirm("是否要覆盖之前的记录 No:" + data.mouse.no + " tumor volume:" + data.mouse.tumorVolume)
+					  	if (r==true) {
+					  		$.ajax({
+								async : true,
+								type : "POST",
+								url : [[@{/addMouse}]],
+								data : {
+									tumorLength : $("#tumorLengthInput").val(),
+									tumorWidth : $("#tumorWidthInput").val(),
+									tumorVolume : $("#tumorVolumeInput").val(),
+									no : $("#mouseNoInput").val(),
+									forceSave : "true",
+									groupId : [[${mouseGroupId}]]
+								},
+								dataType : "json",
+								success : function(data) {
+									$('#loading').modal('hide');
+									if(data['save'] == 1){
+										$("#tumorLengthInput").val("");
+										$("#tumorWidthInput").val("");
+										$("#tumorVolumeInput").val("");
+										$("#mouseNoInput").val("");
+									}else{
+										alert("保存失败");
+									}
+								} 
+							})
+						} else {
+							$('#loading').modal('hide');
+						} 
+					}
 				},
 				error : function() {
 					alert(arguments[1]);

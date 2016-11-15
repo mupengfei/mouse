@@ -13,12 +13,13 @@
 	rel="stylesheet" media="screen" />
 <script src="http://cdn.jsdelivr.net/webjars/jquery/2.2.1/jquery.min.js"
 	th:src="@{/webjars/jquery/2.2.1/jquery.min.js}"></script>
+<script
+	src="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/js/bootstrap.min.js"
+	th:src="@{/webjars/bootstrap/3.3.6/js/bootstrap.min.js}"></script>
 </head>
 <body>
 	<div class="container">
 		<br /> <br /> <br /> <br /> <br /> <br /> <br />
-
-
 		<div class="row">
 			<div class="col-xs-1"></div>
 			<div class="col-xs-10 text-center">
@@ -30,15 +31,51 @@
 						name="mouseGroupId" th:value="${mouseGroupId}"></input>
 
 
-					<button type="submit" formmethod="get" th:formaction="@{/goAddMouse}"
-						formaction="/goAddMouse" class="btn btn-primary btn-block">Add</button>
+					<button type="submit" formmethod="get"
+						th:formaction="@{/goAddMouse}" formaction="/goAddMouse"
+						class="btn btn-primary btn-block">Add</button>
 					<br /> <br />
-					<button type="submit"
+					<!-- 	<button type="submit"
 						th:formaction="@{/groupMouse(mouseGroupId=${mouseGroupId})}"
+						class="btn btn-success btn-block">Group</button> -->
+					<button type="button" id="groupBut"
 						class="btn btn-success btn-block">Group</button>
 				</form>
 			</div>
 		</div>
 	</div>
+	<div id="loading" class="modal fade bs-example-modal-sm" tabindex="-1"
+		role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+		<div class="modal-dialog modal-sm">
+
+			<div class="progress"
+				style="width: 200px; margin: 0 auto; margin-top: 300px;">
+				<div
+					class="progress-bar progress-bar-info progress-bar-striped active"
+					role="progressbar" aria-valuenow="20" aria-valuemin="0"
+					aria-valuemax="100" style="width: 100%">
+					<span class="sr-only">20% Complete</span>
+				</div>
+			</div>
+
+		</div>
+	</div>
+	<script th:inline="JavaScript">
+		/*<![CDATA[*/
+		$('#groupBut').click(function() {
+			var num = prompt("请输入分组总数", "1");
+			if (num != null && num != "" && !isNaN(num)) {
+				$('#loading').modal({
+					show : true,
+					backdrop : 'static'
+				});
+				window.location.href = [[@{/goGroupMouse(mouseGroupId=${mouseGroupId})}]] + "&groupNum=" + num;
+			}else if(num == null){
+			} else{
+				alert("分组总数请输入数字");
+			}
+		});
+		/*]]>*/
+	</script>
 </body>
 </html>
