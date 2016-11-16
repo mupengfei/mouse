@@ -63,6 +63,11 @@
 	<script th:inline="JavaScript">
 		/*<![CDATA[*/
 		$('#groupBut').click(function() {
+			if([[${mouseGroupNum}]]==0){
+				alert("数量为0不能进行分组");
+				return;
+			}
+				
 			var num = prompt("请输入分组总数", "1");
 			if (num != null && num != "" && !isNaN(num)) {
 				$('#loading').modal({
